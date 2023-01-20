@@ -1,0 +1,21 @@
+{
+    "include": ["src/**/*.ts"],
+    "exclude": [
+        "node_modules/**/*.*",
+        "src/lib/**/*.*",
+        "src/**/*spec*",
+        "src/**/*test*"
+    ],
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "declaration": true,
+        "declarationMap": false,
+        "outDir": "./build",
+        "strict": true,
+        "typeRoots": ["./node_modules/@types"],
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "skipLibCheck": false
+    }
+}
