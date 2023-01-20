@@ -1,6 +1,8 @@
 import axios from "axios";
+import { ParasutService } from "../lib/ParasutService";
 import { ParasutEndpoints, HTTPMethods } from "../lib/Endpoints";
 import { TokenAuthenticationResponse } from "../lib/types/response/TokenAuthentication.response";
+import { GetSalesInvoicesParams } from "../lib/types/request/params/GetSalesInvoices.params";
 
 export class ParasutClient {
     private authentication:
@@ -8,14 +10,18 @@ export class ParasutClient {
               expire_date: Date;
           })
         | undefined;
+    private ParasutService: ParasutService;
 
     constructor(
         private client_id: string,
         private client_secret: string,
         private username: string,
         private password: string,
-        private redirect_uri: string
+        private redirect_uri: string,
+        private company_id: number
     ) {
+        this.ParasutService = new ParasutService(this.company_id);
+
         try {
             this.tokenAuthentication(
                 this.client_id,
@@ -67,6 +73,13 @@ export class ParasutClient {
         return response.data as T;
     }
 
+    private checkIfTokenIsValid() {
+        return (
+            this.authentication !== undefined &&
+            this.authentication.expire_date.getTime() < Date.now()
+        );
+    }
+
     private async tokenAuthentication(
         client_id: string,
         client_secret: string,
@@ -88,6 +101,35 @@ export class ParasutClient {
                     redirect_uri,
                 }
             );
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    public async GetSalesInvoices(params: GetSalesInvoicesParams) {
+        try {
+            if (!this.checkIfTokenIsValid()) {
+                const token = await this.tokenAuthentication(
+                    this.client_id,
+                    this.client_secret,
+                    this.username,
+                    this.password,
+                    this.redirect_uri
+                );
+                this.authentication = {
+                    ...token,
+                    expire_date: new Date(
+                        new Date().getTime() + token.expires_in
+                    ),
+                };
+            }
+
+            const paramsObj = {
+                ...params,
+                access_token: this.authentication?.access_token as string,
+            };
+
+            return await this.ParasutService.GetSalesInvoices(paramsObj);
         } catch (error) {
             throw error;
         }

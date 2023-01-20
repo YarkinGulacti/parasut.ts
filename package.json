@@ -1,5 +1,5 @@
 {
-    "name": "parasut.ts",
+    "name": "parasut-client.ts",
     "version": "0.0.1-alpha",
     "description": "A Typescript Parasut package.",
     "main": "build/index.js",
