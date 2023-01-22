@@ -49,6 +49,48 @@ export interface GetContactsResponse {
             payment_reminder_preview_url?: string;
         };
         relationships?: {
+            price_list: {
+                meta?: {
+                    id?: string;
+                    type?: ResourceType.ItemCategories;
+                }[];
+            };
+            activities: {
+                meta?: {
+                    id?: string;
+                    type?: ResourceType.ItemCategories;
+                }[];
+            };
+            e_invoice_inboxes: {
+                meta?: {
+                    id?: string;
+                    type?: ResourceType.ItemCategories;
+                }[];
+            };
+            sharings: {
+                meta?: {
+                    id?: string;
+                    type?: ResourceType.ItemCategories;
+                }[];
+            };
+            tags: {
+                meta?: {
+                    id?: string;
+                    type?: ResourceType.ItemCategories;
+                }[];
+            };
+            comments: {
+                meta?: {
+                    id?: string;
+                    type?: ResourceType.ItemCategories;
+                }[];
+            };
+            operated_by: {
+                meta?: {
+                    id?: string;
+                    type?: ResourceType.ItemCategories;
+                };
+            };
             category?: {
                 meta?: {
                     id?: string;
