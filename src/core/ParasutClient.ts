@@ -3,6 +3,7 @@ import { ParasutService } from "../lib/ParasutService";
 import { ParasutEndpoints, HTTPMethods } from "../lib/Endpoints";
 import { TokenAuthenticationResponse } from "../lib/types/response/TokenAuthentication.response";
 import { GetSalesInvoicesParams } from "../lib/types/request/params/GetSalesInvoices.params";
+import { GetContactsParams } from "../lib/types/request/params/GetContacts.params";
 
 export class ParasutClient {
     private authentication:
@@ -106,7 +107,7 @@ export class ParasutClient {
         }
     }
 
-    public async GetSalesInvoices(params: GetSalesInvoicesParams) {
+    public async GetSalesInvoices(params?: GetSalesInvoicesParams) {
         try {
             if (!this.checkIfTokenIsValid()) {
                 const token = await this.tokenAuthentication(
@@ -130,6 +131,35 @@ export class ParasutClient {
             };
 
             return await this.ParasutService.GetSalesInvoices(paramsObj);
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    public async GetContacts(params?: GetContactsParams) {
+        try {
+            if (!this.checkIfTokenIsValid()) {
+                const token = await this.tokenAuthentication(
+                    this.client_id,
+                    this.client_secret,
+                    this.username,
+                    this.password,
+                    this.redirect_uri
+                );
+                this.authentication = {
+                    ...token,
+                    expire_date: new Date(
+                        new Date().getTime() + token.expires_in
+                    ),
+                };
+            }
+
+            const paramsObj = {
+                ...params,
+                access_token: this.authentication?.access_token as string,
+            };
+
+            return await this.ParasutService.GetContacts(paramsObj);
         } catch (error) {
             throw error;
         }

@@ -12,7 +12,7 @@ export interface GetSalesInvoicesParams {
     "filter[item_type]"?: ItemType;
     "filter[print_status]"?: PrintStatus;
     "filter[payment_status]"?: PaymentStatus;
-    "page[number]": number;
-    "page[size]": number;
-    include?: Include;
+    "page[number]"?: number;
+    "page[size]"?: number;
+    include?: string;
 }

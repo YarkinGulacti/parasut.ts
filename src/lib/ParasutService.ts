@@ -2,7 +2,8 @@ import axios from "axios";
 import { HTTPMethods, ParasutEndpoints } from "./Endpoints";
 import { GetSalesInvoicesParams } from "./types/request/params/GetSalesInvoices.params";
 import { GetSalesInvoicesResponse } from "./types/response/GetSalesInvoices.response";
-
+import { GetContactsParams } from "./types/request/params/GetContacts.params";
+import { GetContactsResponse } from "./types/response/GetContacts.repsonse";
 export class ParasutService {
     constructor(private company_id: number) {}
 
@@ -34,7 +35,7 @@ export class ParasutService {
     }
 
     public async GetSalesInvoices(
-        params: GetSalesInvoicesParams & {
+        params?: GetSalesInvoicesParams & {
             access_token: string;
         }
     ) {
@@ -42,6 +43,23 @@ export class ParasutService {
             return await this.buildRequest<GetSalesInvoicesResponse>(
                 ParasutEndpoints.BASE_URL,
                 `${ParasutEndpoints.VERSION}/${this.company_id}${ParasutEndpoints.GET_SALES_INVOICES}`,
+                HTTPMethods.GET,
+                params
+            );
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    public async GetContacts(
+        params?: GetContactsParams & {
+            access_token: string;
+        }
+    ) {
+        try {
+            return await this.buildRequest<GetContactsResponse>(
+                ParasutEndpoints.BASE_URL,
+                `${ParasutEndpoints.VERSION}/${this.company_id}${ParasutEndpoints.GET_CONTACTS}`,
                 HTTPMethods.GET,
                 params
             );

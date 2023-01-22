@@ -2,6 +2,8 @@ export enum ResourceType {
     SalesInvoices = "sales_invoices",
     ItemCategories = "item_categories",
     Contacts = "contacts",
+    ContactPortals = "contact_portals",
+    ContactPeople = "contact_people",
     SalesInvoiceDetails = "sales_invoice_details",
     Payments = "payments",
     Tags = "tags",
