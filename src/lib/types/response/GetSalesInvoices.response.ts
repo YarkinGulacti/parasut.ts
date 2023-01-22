@@ -71,55 +71,55 @@ export interface GetSalesInvoicesResponse {
         };
         relationships?: {
             category?: {
-                data?: {
+                meta?: {
                     id?: string;
                     type?: ResourceType;
                 };
             };
             contact?: {
-                data?: {
+                meta?: {
                     id?: string;
                     type?: ResourceType;
                 };
             };
             details?: {
-                data?: {
+                meta?: {
                     id?: string;
                     type?: ResourceType;
                 }[];
             };
             payments?: {
-                data?: {
+                meta?: {
                     id?: string;
                     type?: ResourceType;
                 }[];
             };
             tags?: {
-                data?: {
+                meta?: {
                     id?: string;
                     type?: ResourceType;
                 }[];
             };
             sales_offer?: {
-                data?: {
+                meta?: {
                     id?: string;
                     type?: ResourceType;
                 };
             };
             sharings?: {
-                data?: {
+                meta?: {
                     id?: string;
                     type?: ResourceType;
                 }[];
             };
             recurrence_plan?: {
-                data?: {
+                meta?: {
                     id?: string;
                     type?: ResourceType;
                 };
             };
             active_e_document?: {
-                data?: {
+                meta?: {
                     id?: string;
                     type?: ResourceType;
                 };

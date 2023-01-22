@@ -50,19 +50,19 @@ export interface GetContactsResponse {
         };
         relationships?: {
             category?: {
-                data?: {
+                meta?: {
                     id?: string;
                     type?: ResourceType.ItemCategories;
                 };
             };
             contact_portal?: {
-                data?: {
+                meta?: {
                     id?: string;
                     type?: ResourceType.ContactPortals;
                 };
             };
             contact_people?: {
-                data?: {
+                meta?: {
                     id?: string;
                     type?: ResourceType.ContactPeople;
                 }[];
