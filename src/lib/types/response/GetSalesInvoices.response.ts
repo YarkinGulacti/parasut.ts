@@ -51,6 +51,23 @@ export interface GetSalesInvoicesResponse {
             shipment_addres?: string;
             shipment_included?: boolean;
             cash_sale?: boolean;
+            billing_postal_code?: string;
+            contact_type?: string;
+            days_overdue?: number;
+            days_till_due_date?: number;
+            is_recurred_item?: boolean;
+            item_type_before_cancellation?: ItemType;
+            net_total_in_trl?: number;
+            payer_tax_numbers?: string;
+            print_note?: string;
+            print_url?: string;
+            printed_at?: string;
+            sharing_preview_path?: string;
+            sharing_preview_url?: string;
+            sharings_count?: number;
+            shipment_date?: string;
+            shipment_document_no?: number;
+            total_paid?: string;
         };
         relationships?: {
             category?: {
