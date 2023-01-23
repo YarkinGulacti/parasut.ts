@@ -1,5 +1,6 @@
 export enum Sort {
     Id = "id",
+    CategoryType = "category_type",
     IssueDate = "issue_date",
     DueDate = "due_date",
     Remaining = "remaining",

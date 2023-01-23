@@ -40,7 +40,7 @@ export interface GetSalesInvoicesParams {
      */
     "filter[payment_status]"?: string;
     /**
-     * Comma seperated string. Available values;
+     * Available values;
      * ```js
      * Sort.Id
      * Sort.IssueDate

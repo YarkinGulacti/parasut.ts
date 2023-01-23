@@ -14,7 +14,7 @@ export interface GetContactsParams {
      */
     "filter[account_type]"?: string;
     /**
-     * Comma seperated string. Available values;
+     * Available values;
      * ```js
      * Sort.Id;
      * Sort.Balance;
