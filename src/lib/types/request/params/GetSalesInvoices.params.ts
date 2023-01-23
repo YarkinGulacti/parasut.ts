@@ -14,5 +14,9 @@ export interface GetSalesInvoicesParams {
     "filter[payment_status]"?: PaymentStatus;
     "page[number]"?: number;
     "page[size]"?: number;
+    /**
+     * @description Comma seperated string.
+     * @enum Include `Include.Category`, `Include.Contact`, `Include.Details`, `Include.DetailsDotProduct`, `Include.DetailsDotWarehouse`, `Include.Payments`, `Include.PaymentsDotTransaction`, `Include.Tags`, `Include.Sharings`, `Include.RecurrencePlan`, `Include.ActiveEDocument`.
+     */
     include?: string;
 }

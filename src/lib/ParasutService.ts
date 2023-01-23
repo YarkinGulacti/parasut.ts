@@ -4,6 +4,9 @@ import { GetSalesInvoicesParams } from "./types/request/params/GetSalesInvoices.
 import { GetSalesInvoicesResponse } from "./types/response/GetSalesInvoices.response";
 import { GetContactsParams } from "./types/request/params/GetContacts.params";
 import { GetContactsResponse } from "./types/response/GetContacts.repsonse";
+import { GetCategoriesParams } from "./types/request/params/GetCategories.params";
+import { GetCategoriesResponse } from "./types/response/GetCategories.response";
+
 export class ParasutService {
     constructor(private company_id: number) {}
 
@@ -60,6 +63,23 @@ export class ParasutService {
             return await this.buildRequest<GetContactsResponse>(
                 ParasutEndpoints.BASE_URL,
                 `${ParasutEndpoints.VERSION}/${this.company_id}${ParasutEndpoints.GET_CONTACTS}`,
+                HTTPMethods.GET,
+                params
+            );
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    public async GetCategories(
+        params?: GetCategoriesParams & {
+            access_token: string;
+        }
+    ) {
+        try {
+            return await this.buildRequest<GetCategoriesResponse>(
+                ParasutEndpoints.BASE_URL,
+                `${ParasutEndpoints.VERSION}/${this.company_id}${ParasutEndpoints.GET_CATEGORIES}`,
                 HTTPMethods.GET,
                 params
             );

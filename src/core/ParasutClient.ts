@@ -4,6 +4,7 @@ import { ParasutEndpoints, HTTPMethods } from "../lib/Endpoints";
 import { TokenAuthenticationResponse } from "../lib/types/response/TokenAuthentication.response";
 import { GetSalesInvoicesParams } from "../lib/types/request/params/GetSalesInvoices.params";
 import { GetContactsParams } from "../lib/types/request/params/GetContacts.params";
+import { GetCategoriesParams } from "../lib/types/request/params/GetCategories.params";
 
 export class ParasutClient {
     private authentication:
@@ -160,6 +161,35 @@ export class ParasutClient {
             };
 
             return await this.ParasutService.GetContacts(paramsObj);
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    public async GetCategories(params?: GetCategoriesParams) {
+        try {
+            if (!this.checkIfTokenIsValid()) {
+                const token = await this.tokenAuthentication(
+                    this.client_id,
+                    this.client_secret,
+                    this.username,
+                    this.password,
+                    this.redirect_uri
+                );
+                this.authentication = {
+                    ...token,
+                    expire_date: new Date(
+                        new Date().getTime() + token.expires_in
+                    ),
+                };
+            }
+
+            const paramsObj = {
+                ...params,
+                access_token: this.authentication?.access_token as string,
+            };
+
+            return await this.ParasutService.GetCategories(paramsObj);
         } catch (error) {
             throw error;
         }

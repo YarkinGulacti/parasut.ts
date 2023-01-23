@@ -79,4 +79,15 @@ describe("Parasut Client tests.", () => {
             expect(firstRecord.attributes?.term_days).toBeGreaterThanOrEqual(0);
         }
     });
+
+    test("Get sales categories test", async () => {
+        const response = await client.GetCategories();
+
+        const firstRecord = response?.data?.shift();
+
+        if (firstRecord) {
+            expect(firstRecord.type).toBe(ResourceType.ItemCategories);
+            expect(firstRecord.attributes?.bg_color).toBeDefined();
+        }
+    });
 });

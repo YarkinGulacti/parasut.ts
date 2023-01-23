@@ -1,5 +1,7 @@
 export enum Include {
     Category = "category",
+    ParentCategory = "parent_category",
+    SubCategories = "subcategories",
     Contact = "contact",
     Details = "details",
     DetailsDotProduct = "details.product",
@@ -7,7 +9,7 @@ export enum Include {
     Payments = "payments",
     PaymentDotTransaction = "payments.transaction",
     Tags = "tags",
-    Shraings = "sharings",
+    Sharings = "sharings",
     RecurrencePlan = "recurrence_plan",
     ActiveEDocument = "active_e_document",
 }

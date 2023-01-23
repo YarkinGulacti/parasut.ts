@@ -9,5 +9,8 @@ export interface GetContactsParams {
     sort?: string;
     "page[number]"?: number;
     "page[size]"?: number;
+    /**
+     * @description Comma seperated string. Can have `Include.Category`, `Include.ContactPortal` and `Include.ContactPeople`.
+     */
     include?: string;
 }
