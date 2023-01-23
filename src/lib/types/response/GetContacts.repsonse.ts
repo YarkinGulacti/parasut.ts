@@ -52,61 +52,61 @@ export interface GetContactsResponse {
             price_list: {
                 meta?: {
                     id?: string;
-                    type?: ResourceType.ItemCategories;
+                    type?: ResourceType;
                 }[];
             };
             activities: {
                 meta?: {
                     id?: string;
-                    type?: ResourceType.ItemCategories;
+                    type?: ResourceType;
                 }[];
             };
             e_invoice_inboxes: {
                 meta?: {
                     id?: string;
-                    type?: ResourceType.ItemCategories;
+                    type?: ResourceType;
                 }[];
             };
             sharings: {
                 meta?: {
                     id?: string;
-                    type?: ResourceType.ItemCategories;
+                    type?: ResourceType;
                 }[];
             };
             tags: {
                 meta?: {
                     id?: string;
-                    type?: ResourceType.ItemCategories;
+                    type?: ResourceType;
                 }[];
             };
             comments: {
                 meta?: {
                     id?: string;
-                    type?: ResourceType.ItemCategories;
+                    type?: ResourceType;
                 }[];
             };
             operated_by: {
                 meta?: {
                     id?: string;
-                    type?: ResourceType.ItemCategories;
+                    type?: ResourceType;
                 };
             };
             category?: {
                 meta?: {
                     id?: string;
-                    type?: ResourceType.ItemCategories;
+                    type?: ResourceType;
                 };
             };
             contact_portal?: {
                 meta?: {
                     id?: string;
-                    type?: ResourceType.ContactPortals;
+                    type?: ResourceType;
                 };
             };
             contact_people?: {
                 meta?: {
                     id?: string;
-                    type?: ResourceType.ContactPeople;
+                    type?: ResourceType;
                 }[];
             };
         };
