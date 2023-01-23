@@ -1,4 +1,5 @@
 import { ResourceType } from "../enum/ResourceType.enum";
+import { CategoryType } from "../enum/CategoryType.enum";
 
 export interface GetCategoriesResponse {
     data: {
@@ -11,7 +12,7 @@ export interface GetCategoriesResponse {
             name: string;
             bg_color: string;
             text_color: string;
-            category_type: string;
+            category_type: CategoryType;
             parent_id: number;
         };
         relationships: {
