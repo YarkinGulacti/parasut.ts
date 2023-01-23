@@ -100,11 +100,23 @@ export interface GetSalesInvoicesResponse {
                     type?: ResourceType;
                 }[];
             };
-            sales_offer?: {
+            activities?: {
+                meta?: {
+                    id?: string;
+                    type?: ResourceType;
+                }[];
+            };
+            refund_of?: {
                 meta?: {
                     id?: string;
                     type?: ResourceType;
                 };
+            };
+            refunds?: {
+                meta?: {
+                    id?: string;
+                    type?: ResourceType;
+                }[];
             };
             sharings?: {
                 meta?: {
@@ -112,13 +124,43 @@ export interface GetSalesInvoicesResponse {
                     type?: ResourceType;
                 }[];
             };
-            recurrence_plan?: {
+            active_e_document?: {
                 meta?: {
                     id?: string;
                     type?: ResourceType;
                 };
             };
-            active_e_document?: {
+            recurrence_of: {
+                meta?: {
+                    id?: string;
+                    type?: ResourceType;
+                };
+            };
+            shipment_documents: {
+                meta?: {
+                    id?: string;
+                    type?: ResourceType;
+                }[];
+            };
+            sales_offer?: {
+                meta?: {
+                    id?: string;
+                    type?: ResourceType;
+                };
+            };
+            price_list: {
+                meta?: {
+                    id?: string;
+                    type?: ResourceType;
+                }[];
+            };
+            operated_by: {
+                meta?: {
+                    id?: string;
+                    type?: ResourceType;
+                };
+            };
+            failed_e_invoice: {
                 meta?: {
                     id?: string;
                     type?: ResourceType;
@@ -132,9 +174,21 @@ export interface GetSalesInvoicesResponse {
         attributes?: Record<string, any>;
         relationships?: Record<string, any>;
     }[];
+    links?: {
+        self?: string;
+        first?: string;
+        prev?: string;
+        next?: string;
+        last?: string;
+    };
     meta?: {
         current_page?: number;
         total_pages?: number;
         total_count?: number;
+        per_page?: number;
+        outstanding_total?: string;
+        net_total?: string;
+        export_url?: string;
+        e_documents_download_url?: string;
     };
 }
