@@ -173,6 +173,10 @@ export interface GetSalesInvoicesResponse {
         type?: ResourceType;
         attributes?: Record<string, any>;
         relationships?: Record<string, any>;
+        meta?: {
+            created_at?: string;
+            updated_at?: string;
+        };
     }[];
     links?: {
         self?: string;

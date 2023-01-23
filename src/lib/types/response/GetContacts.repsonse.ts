@@ -116,10 +116,20 @@ export interface GetContactsResponse {
         type?: ResourceType;
         attributes?: Record<string, any>;
         relationships?: Record<string, any>;
+        meta?: {
+            created_at?: string;
+            updated_at?: string;
+        };
     }[];
     meta?: {
         current_page?: number;
         total_pages?: number;
         total_count?: number;
+        per_page?: number;
+        payable_total?: string;
+        collectible_total?: string;
+        supplier_payments_due_in_thirty_days_total?: string;
+        customer_payments_due_in_thirty_days_total?: string;
+        export_url?: string;
     };
 }

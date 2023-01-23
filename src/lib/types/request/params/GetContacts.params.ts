@@ -5,12 +5,33 @@ export interface GetContactsParams {
     "filter[tax_number]"?: string;
     "filter[tax_office]"?: string;
     "filter[city]"?: string;
-    "filter[account_type]"?: AccountType;
+    /**
+     * Comma seperated string. Available values;
+     * ```js
+     * AccountType.Customer;
+     * AccountType.Supplier;
+     * ```
+     */
+    "filter[account_type]"?: string;
+    /**
+     * Comma seperated string. Available values;
+     * ```js
+     * Sort.Id;
+     * Sort.Balance;
+     * Sort.Name;
+     * Sort.Email;
+     * ```
+     */
     sort?: string;
     "page[number]"?: number;
     "page[size]"?: number;
     /**
-     * @description Comma seperated string. Can have `Include.Category`, `Include.ContactPortal` and `Include.ContactPeople`.
+     * Comma seperated string. Available values;
+     * ```js
+     * Include.Category;
+     * Include.ContactPortal;
+     * Include.ContactPeople;
+     * ```
      */
     include?: string;
 }
