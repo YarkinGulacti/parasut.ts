@@ -121,15 +121,17 @@ export interface GetContactsResponse {
             updated_at?: string;
         };
     }[];
+    links?: {
+        self?: string;
+        first?: string;
+        prev?: string;
+        next?: string;
+        last?: string;
+    };
     meta?: {
         current_page?: number;
         total_pages?: number;
         total_count?: number;
         per_page?: number;
-        payable_total?: string;
-        collectible_total?: string;
-        supplier_payments_due_in_thirty_days_total?: string;
-        customer_payments_due_in_thirty_days_total?: string;
-        export_url?: string;
     };
 }
