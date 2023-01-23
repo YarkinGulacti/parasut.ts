@@ -6,7 +6,7 @@ export interface GetCategoriesResponse {
         id: string;
         type: ResourceType.ItemCategories;
         attributes: {
-            full_path: string;
+            full_path: Array<string>;
             created_at: string;
             updated_at: string;
             name: string;
