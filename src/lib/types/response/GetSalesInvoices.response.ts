@@ -9,7 +9,7 @@ export interface GetSalesInvoicesResponse {
         type?: ResourceType.SalesInvoices;
         attributes?: SalesInvoiceAttributes;
         relationships?: Array<SalesInvoiceRelationships>;
-    };
+    }[];
     included?: {
         id?: string;
         type?: ResourceType;
