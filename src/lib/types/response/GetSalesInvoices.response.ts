@@ -66,106 +66,114 @@ export interface GetSalesInvoicesResponse {
             sharing_preview_url?: string;
             sharings_count?: number;
             shipment_date?: string;
+            shipment_address?: string;
             shipment_document_no?: number;
             total_paid?: string;
+            total_accommodation_tax?: string;
+            total_vat_withholding?: string;
+            accommodation_tax_exemption_reason_code?: string;
         };
         relationships?: {
             category?: {
-                meta?: {
+                data?: {
                     id?: string;
                     type?: ResourceType;
                 };
             };
             contact?: {
-                meta?: {
+                data?: {
                     id?: string;
                     type?: ResourceType;
                 };
             };
             details?: {
-                meta?: {
+                data?: {
                     id?: string;
                     type?: ResourceType;
                 }[];
             };
             payments?: {
-                meta?: {
+                data?: {
                     id?: string;
                     type?: ResourceType;
                 }[];
             };
             tags?: {
-                meta?: {
+                data?: {
                     id?: string;
                     type?: ResourceType;
                 }[];
             };
             activities?: {
-                meta?: {
+                data?: {
                     id?: string;
                     type?: ResourceType;
                 }[];
             };
             refund_of?: {
-                meta?: {
+                data?: {
                     id?: string;
                     type?: ResourceType;
                 };
             };
             refunds?: {
-                meta?: {
+                data?: {
                     id?: string;
                     type?: ResourceType;
                 }[];
             };
             sharings?: {
-                meta?: {
+                data?: {
                     id?: string;
                     type?: ResourceType;
                 }[];
             };
             active_e_document?: {
-                meta?: {
+                data?: {
                     id?: string;
                     type?: ResourceType;
                 };
             };
             recurrence_of: {
-                meta?: {
+                data?: {
                     id?: string;
                     type?: ResourceType;
                 };
             };
             shipment_documents: {
-                meta?: {
+                data?: {
                     id?: string;
                     type?: ResourceType;
                 }[];
             };
             sales_offer?: {
-                meta?: {
+                data?: {
                     id?: string;
                     type?: ResourceType;
                 };
             };
             price_list: {
-                meta?: {
+                data?: {
                     id?: string;
                     type?: ResourceType;
                 }[];
             };
             operated_by: {
-                meta?: {
+                data?: {
                     id?: string;
                     type?: ResourceType;
                 };
             };
             failed_e_invoice: {
-                meta?: {
+                data?: {
                     id?: string;
                     type?: ResourceType;
                 };
             };
+        };
+        meta?: {
+            created_at?: string;
+            updated_at?: string;
         };
     }[];
     included?: {
