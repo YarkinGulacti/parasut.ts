@@ -12,4 +12,6 @@ export enum Include {
     Sharings = "sharings",
     RecurrencePlan = "recurrence_plan",
     ActiveEDocument = "active_e_document",
+    RefundOf = "refund_of",
+    FailedEInvoice = "failed_e_invoice",
 }
