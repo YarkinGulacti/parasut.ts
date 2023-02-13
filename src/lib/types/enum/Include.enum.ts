@@ -14,4 +14,7 @@ export enum Include {
     ActiveEDocument = "active_e_document",
     RefundOf = "refund_of",
     FailedEInvoice = "failed_e_invoice",
+    ContactPortal = "contact_portal",
+    ContactPeople = "contact_people",
+    Company = "company",
 }

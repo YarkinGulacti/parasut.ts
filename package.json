@@ -1,6 +1,6 @@
 {
     "name": "parasut-client.ts",
-    "version": "0.0.19",
+    "version": "0.0.20",
     "description": "A Typescript Parasut package.",
     "main": "build/index.js",
     "types": "build/index.d.ts",
