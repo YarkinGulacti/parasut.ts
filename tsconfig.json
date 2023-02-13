@@ -1,11 +1,6 @@
 {
     "include": ["src/**/*.ts"],
-    "exclude": [
-        "node_modules/**/*.*",
-        "src/lib/**/*.*",
-        "src/**/*spec*",
-        "src/**/*test*"
-    ],
+    "exclude": ["node_modules/**/*.*", "src/**/*spec.ts"],
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
