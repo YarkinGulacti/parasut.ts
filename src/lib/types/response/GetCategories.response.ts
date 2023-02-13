@@ -1,38 +1,15 @@
 import { ResourceType } from "../enum/ResourceType.enum";
-import { CategoryType } from "../enum/CategoryType.enum";
+import { CategoryAttributes } from "../interface/CategoryAttributes.interface";
+import { CategoryRelationships } from "../interface/CategoryRelationships.interface";
+import { Meta } from "../interface/Meta.interface";
 
 export interface GetCategoriesResponse {
     data: {
-        id: string;
-        type: ResourceType.ItemCategories;
-        attributes: {
-            full_path: Array<string>;
-            created_at: string;
-            updated_at: string;
-            name: string;
-            bg_color: string;
-            text_color: string;
-            category_type: CategoryType;
-            parent_id: number;
-        };
-        relationships: {
-            parent_category: {
-                data: {
-                    id: string;
-                    type: ResourceType.ItemCategories;
-                };
-            };
-            subcategories: {
-                data: {
-                    id: string;
-                    type: ResourceType.ItemCategories;
-                }[];
-            };
-        };
-        meta?: {
-            created_at?: string;
-            updated_at?: string;
-        };
+        id?: string;
+        type?: ResourceType.ItemCategories;
+        attributes?: CategoryAttributes;
+        relationships?: CategoryRelationships;
+        meta?: Meta;
     }[];
     included: {
         id: string;
