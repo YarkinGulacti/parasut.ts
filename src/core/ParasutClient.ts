@@ -73,10 +73,6 @@ export class ParasutClient {
         return response.data as T;
     }
 
-    private checkIfTokenIsValid() {
-        return this.authentication !== undefined && this.authentication.expire_date.getTime() < Date.now();
-    }
-
     private async tokenAuthentication(
         client_id: string,
         client_secret: string,

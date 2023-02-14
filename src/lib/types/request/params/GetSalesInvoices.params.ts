@@ -1,8 +1,7 @@
-import { PrintStatus } from "../../enum/PrintStatus.enum";
-import { PaymentStatus } from "../../enum/PaymentStatus.enum";
+import { BaseQuery } from "../../interface/BaseQuery.interface";
 
 export interface GetSalesInvoicesParams {
-    "filter[issue_date]"?: string;
+    "filter[issue_date]"?: BaseQuery<string>;
     "filter[due_date]"?: string;
     "filter[contact_id]"?: number;
     "filter[invoice_id]"?: number;
@@ -51,7 +50,7 @@ export interface GetSalesInvoicesParams {
      * Sort.NetTotal
      * ```
      */
-    sort?: string;
+    "sort"?: string;
     "page[number]"?: number;
     "page[size]"?: number;
     /**
@@ -70,5 +69,5 @@ export interface GetSalesInvoicesParams {
      * Include.ActiveEDocument;
      * ```
      */
-    include?: string;
+    "include"?: string;
 }

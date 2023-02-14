@@ -15,7 +15,7 @@ describe("Parasut Client tests.", () => {
             process.env.PARASUT_USERNAME as string,
             process.env.PARASUT_PASSWORD as string,
             process.env.REDIRECT_URI as string,
-            Number(process.env.COMPANY_ID)
+            Number(process.env.COMPANY_ID),
         );
     });
 
@@ -46,9 +46,7 @@ describe("Parasut Client tests.", () => {
             expect(firstRecord.attributes?.days_overdue).toBeDefined();
             expect(firstRecord.attributes?.days_till_due_date).toBeDefined();
             expect(firstRecord.attributes?.is_recurred_item).toBeDefined();
-            expect(
-                firstRecord.attributes?.item_type_before_cancellation
-            ).toBeDefined();
+            expect(firstRecord.attributes?.item_type_before_cancellation).toBeDefined();
             expect(firstRecord.attributes?.net_total_in_trl).toBeDefined();
             expect(firstRecord.attributes?.payer_tax_numbers).toBeDefined();
             expect(firstRecord.attributes?.print_note).toBeDefined();
@@ -63,13 +61,13 @@ describe("Parasut Client tests.", () => {
         }
     });
 
-    test("Get sales contacts test", async () => {
+    test("Get contacts test", async () => {
         const response = await client.GetContacts();
 
         expect(response?.data?.shift()?.id).toBeDefined();
     });
 
-    test("Get sales contacts detailed test", async () => {
+    test("Get contacts detailed test", async () => {
         const response = await client.GetContacts();
 
         const firstRecord = response?.data?.shift();
@@ -80,7 +78,7 @@ describe("Parasut Client tests.", () => {
         }
     });
 
-    test("Get sales categories test", async () => {
+    test("Get categories test", async () => {
         const response = await client.GetCategories();
 
         const firstRecord = response?.data?.shift();
@@ -89,5 +87,25 @@ describe("Parasut Client tests.", () => {
             expect(firstRecord.type).toBe(ResourceType.ItemCategories);
             expect(firstRecord.attributes?.bg_color).toBeDefined();
         }
+    });
+
+    test("Get sales invoice query test", async () => {
+        const response = await client.GetSalesInvoices({
+            "filter[issue_date]": {
+                eq: "2022-01-01",
+            },
+        });
+
+        expect(response.data?.length).toBe(0);
+    });
+
+    test("Get sales invoice query test 2", async () => {
+        const response = await client.GetSalesInvoices({
+            "filter[issue_date]": {
+                not_eq: "2022-01-01",
+            },
+        });
+
+        expect(response.data?.length).toBeGreaterThan(0);
     });
 });
