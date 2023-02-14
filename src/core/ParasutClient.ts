@@ -20,7 +20,7 @@ export class ParasutClient {
         private username: string,
         private password: string,
         private redirect_uri: string,
-        private company_id: number
+        private company_id: number,
     ) {
         this.ParasutService = new ParasutService(this.company_id);
 
@@ -30,14 +30,12 @@ export class ParasutClient {
                 this.client_secret,
                 this.username,
                 this.password,
-                this.redirect_uri
+                this.redirect_uri,
             )
                 .then((token) => {
                     this.authentication = {
                         ...token,
-                        expire_date: new Date(
-                            new Date().getTime() + token.expires_in
-                        ),
+                        expire_date: new Date(new Date().getTime() + token.expires_in),
                     };
                 })
                 .catch((error) => {
@@ -64,7 +62,7 @@ export class ParasutClient {
         method: HTTPMethods,
         params?: any,
         body?: any,
-        headers?: any
+        headers?: any,
     ) {
         const query = this.buildQueryParameters(params);
         const url = `${baseUrl}${endpoint}${query}`;
@@ -76,10 +74,7 @@ export class ParasutClient {
     }
 
     private checkIfTokenIsValid() {
-        return (
-            this.authentication !== undefined &&
-            this.authentication.expire_date.getTime() < Date.now()
-        );
+        return this.authentication !== undefined && this.authentication.expire_date.getTime() < Date.now();
     }
 
     private async tokenAuthentication(
@@ -87,7 +82,7 @@ export class ParasutClient {
         client_secret: string,
         username: string,
         password: string,
-        redirect_uri: string
+        redirect_uri: string,
     ) {
         try {
             return await this.buildRequest<TokenAuthenticationResponse>(
@@ -101,7 +96,7 @@ export class ParasutClient {
                     username,
                     password,
                     redirect_uri,
-                }
+                },
             );
         } catch (error) {
             throw error;
@@ -110,21 +105,19 @@ export class ParasutClient {
 
     public async GetSalesInvoices(params?: GetSalesInvoicesParams) {
         try {
-            if (!this.checkIfTokenIsValid()) {
-                const token = await this.tokenAuthentication(
-                    this.client_id,
-                    this.client_secret,
-                    this.username,
-                    this.password,
-                    this.redirect_uri
-                );
-                this.authentication = {
-                    ...token,
-                    expire_date: new Date(
-                        new Date().getTime() + token.expires_in
-                    ),
-                };
-            }
+            // if (!this.checkIfTokenIsValid()) {
+            const token = await this.tokenAuthentication(
+                this.client_id,
+                this.client_secret,
+                this.username,
+                this.password,
+                this.redirect_uri,
+            );
+            this.authentication = {
+                ...token,
+                expire_date: new Date(new Date().getTime() + token.expires_in),
+            };
+            // }
 
             const paramsObj = {
                 ...params,
@@ -139,21 +132,19 @@ export class ParasutClient {
 
     public async GetContacts(params?: GetContactsParams) {
         try {
-            if (!this.checkIfTokenIsValid()) {
-                const token = await this.tokenAuthentication(
-                    this.client_id,
-                    this.client_secret,
-                    this.username,
-                    this.password,
-                    this.redirect_uri
-                );
-                this.authentication = {
-                    ...token,
-                    expire_date: new Date(
-                        new Date().getTime() + token.expires_in
-                    ),
-                };
-            }
+            // if (!this.checkIfTokenIsValid()) {
+            const token = await this.tokenAuthentication(
+                this.client_id,
+                this.client_secret,
+                this.username,
+                this.password,
+                this.redirect_uri,
+            );
+            this.authentication = {
+                ...token,
+                expire_date: new Date(new Date().getTime() + token.expires_in),
+            };
+            // }
 
             const paramsObj = {
                 ...params,
@@ -168,21 +159,19 @@ export class ParasutClient {
 
     public async GetCategories(params?: GetCategoriesParams) {
         try {
-            if (!this.checkIfTokenIsValid()) {
-                const token = await this.tokenAuthentication(
-                    this.client_id,
-                    this.client_secret,
-                    this.username,
-                    this.password,
-                    this.redirect_uri
-                );
-                this.authentication = {
-                    ...token,
-                    expire_date: new Date(
-                        new Date().getTime() + token.expires_in
-                    ),
-                };
-            }
+            // if (!this.checkIfTokenIsValid()) {
+            const token = await this.tokenAuthentication(
+                this.client_id,
+                this.client_secret,
+                this.username,
+                this.password,
+                this.redirect_uri,
+            );
+            this.authentication = {
+                ...token,
+                expire_date: new Date(new Date().getTime() + token.expires_in),
+            };
+            // }
 
             const paramsObj = {
                 ...params,
