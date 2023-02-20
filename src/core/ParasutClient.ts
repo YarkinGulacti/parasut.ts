@@ -64,13 +64,17 @@ export class ParasutClient {
         body?: any,
         headers?: any,
     ) {
-        const query = this.buildQueryParameters(params);
-        const url = `${baseUrl}${endpoint}${query}`;
-        const response = await axios[method](url, body, {
-            headers: headers,
-        });
+        try {
+            const query = this.buildQueryParameters(params);
+            const url = `${baseUrl}${endpoint}${query}`;
+            const response = await axios[method](url, body, {
+                headers: headers,
+            });
 
-        return response.data as T;
+            return response.data as T;
+        } catch (error) {
+            throw error;
+        }
     }
 
     private async tokenAuthentication(
