@@ -6,6 +6,7 @@ import { GetSalesInvoicesParams } from "../lib/types/request/params/GetSalesInvo
 import { GetContactsParams } from "../lib/types/request/params/GetContacts.params";
 import { GetCategoriesParams } from "../lib/types/request/params/GetCategories.params";
 
+//TODO: error management fixes
 export class ParasutClient {
     private authentication:
         | (TokenAuthenticationResponse & {
@@ -24,37 +25,27 @@ export class ParasutClient {
     ) {
         this.ParasutService = new ParasutService(this.company_id);
 
-        try {
-            this.tokenAuthentication(
-                this.client_id,
-                this.client_secret,
-                this.username,
-                this.password,
-                this.redirect_uri,
-            )
-                .then((token) => {
-                    this.authentication = {
-                        ...token,
-                        expire_date: new Date(new Date().getTime() + token.expires_in),
-                    };
-                })
-                .catch((error) => {
-                    throw error;
-                });
-        } catch (error) {
-            throw error;
-        }
+        this.tokenAuthentication(this.client_id, this.client_secret, this.username, this.password, this.redirect_uri)
+            .then((token) => {
+                this.authentication = {
+                    ...token,
+                    expire_date: new Date(new Date().getTime() + token.expires_in),
+                };
+            })
+            .catch((e) => {
+                throw e;
+            });
     }
 
-    private buildQueryParameters(params: any): string {
-        let queryParameters = [];
+    // private buildQueryParameters(params: any): string {
+    //     let queryParameters = [];
 
-        for (const key of Object.keys(params)) {
-            queryParameters.push(`${key}=${params[key] as string}`);
-        }
+    //     for (const key of Object.keys(params)) {
+    //         queryParameters.push(`${key}=${params[key] as string}`);
+    //     }
 
-        return `?${queryParameters.join("&")}`;
-    }
+    //     return `?${queryParameters.join("&")}`;
+    // }
 
     private async buildRequest<T>(
         baseUrl: string,
@@ -64,17 +55,20 @@ export class ParasutClient {
         body?: any,
         headers?: any,
     ) {
-        try {
-            const query = this.buildQueryParameters(params);
-            const url = `${baseUrl}${endpoint}${query}`;
-            const response = await axios[method](url, body, {
-                headers: headers,
-            });
+        const url = `${baseUrl}${endpoint}`;
+        const config = {
+            method,
+            url,
+            body,
+            headers,
+            params,
+        };
 
-            return response.data as T;
-        } catch (error) {
-            throw error;
-        }
+        return await axios<T>(config)
+            .then((r) => r.data)
+            .catch((e) => {
+                throw e;
+            });
     }
 
     private async tokenAuthentication(
@@ -84,103 +78,111 @@ export class ParasutClient {
         password: string,
         redirect_uri: string,
     ) {
-        try {
-            return await this.buildRequest<TokenAuthenticationResponse>(
-                ParasutEndpoints.BASE_URL,
-                ParasutEndpoints.TOKEN_URL,
-                HTTPMethods.POST,
-                {
-                    grant_type: "password",
-                    client_id,
-                    client_secret,
-                    username,
-                    password,
-                    redirect_uri,
-                },
-            );
-        } catch (error) {
-            throw error;
-        }
+        return await this.buildRequest<TokenAuthenticationResponse>(
+            ParasutEndpoints.BASE_URL,
+            ParasutEndpoints.TOKEN_URL,
+            HTTPMethods.POST,
+            {
+                grant_type: "password",
+                client_id,
+                client_secret,
+                username,
+                password,
+                redirect_uri,
+            },
+        )
+            .then((r) => r)
+            .catch((e) => {
+                throw e;
+            });
     }
 
     public async GetSalesInvoices(params?: GetSalesInvoicesParams) {
-        try {
-            // if (!this.checkIfTokenIsValid()) {
-            const token = await this.tokenAuthentication(
-                this.client_id,
-                this.client_secret,
-                this.username,
-                this.password,
-                this.redirect_uri,
-            );
-            this.authentication = {
-                ...token,
-                expire_date: new Date(new Date().getTime() + token.expires_in),
-            };
-            // }
+        // if (!this.checkIfTokenIsValid()) {
+        const token = await this.tokenAuthentication(
+            this.client_id,
+            this.client_secret,
+            this.username,
+            this.password,
+            this.redirect_uri,
+        )
+            .then((r) => r)
+            .catch((e) => {
+                throw e;
+            });
+        this.authentication = {
+            ...token,
+            expire_date: new Date(new Date().getTime() + token.expires_in),
+        };
+        // }
 
-            const paramsObj = {
-                ...params,
-                access_token: this.authentication?.access_token as string,
-            };
+        const paramsObj = {
+            ...params,
+            access_token: this.authentication?.access_token as string,
+        };
 
-            return await this.ParasutService.GetSalesInvoices(paramsObj);
-        } catch (error) {
-            throw error;
-        }
+        return await this.ParasutService.GetSalesInvoices(paramsObj)
+            .then((r) => r)
+            .catch((e) => {
+                throw e;
+            });
     }
 
     public async GetContacts(params?: GetContactsParams) {
-        try {
-            // if (!this.checkIfTokenIsValid()) {
-            const token = await this.tokenAuthentication(
-                this.client_id,
-                this.client_secret,
-                this.username,
-                this.password,
-                this.redirect_uri,
-            );
-            this.authentication = {
-                ...token,
-                expire_date: new Date(new Date().getTime() + token.expires_in),
-            };
-            // }
+        // if (!this.checkIfTokenIsValid()) {
+        const token = await this.tokenAuthentication(
+            this.client_id,
+            this.client_secret,
+            this.username,
+            this.password,
+            this.redirect_uri,
+        )
+            .then((r) => r)
+            .catch((e) => {
+                throw e;
+            });
+        this.authentication = {
+            ...token,
+            expire_date: new Date(new Date().getTime() + token.expires_in),
+        };
+        // }
 
-            const paramsObj = {
-                ...params,
-                access_token: this.authentication?.access_token as string,
-            };
+        const paramsObj = {
+            ...params,
+            access_token: this.authentication?.access_token as string,
+        };
 
-            return await this.ParasutService.GetContacts(paramsObj);
-        } catch (error) {
-            throw error;
-        }
+        return await this.ParasutService.GetContacts(paramsObj)
+            .then((r) => r)
+            .catch((e) => {
+                throw e;
+            });
     }
 
     public async GetCategories(params?: GetCategoriesParams) {
-        try {
-            // if (!this.checkIfTokenIsValid()) {
-            const token = await this.tokenAuthentication(
-                this.client_id,
-                this.client_secret,
-                this.username,
-                this.password,
-                this.redirect_uri,
-            );
-            this.authentication = {
-                ...token,
-                expire_date: new Date(new Date().getTime() + token.expires_in),
-            };
-            // }
+        // if (!this.checkIfTokenIsValid()) {
+        const token = await this.tokenAuthentication(
+            this.client_id,
+            this.client_secret,
+            this.username,
+            this.password,
+            this.redirect_uri,
+        );
+        this.authentication = {
+            ...token,
+            expire_date: new Date(new Date().getTime() + token.expires_in),
+        };
+        // }
 
-            const paramsObj = {
-                ...params,
-                access_token: this.authentication?.access_token as string,
-            };
+        const paramsObj = {
+            ...params,
+            access_token: this.authentication?.access_token as string,
+        };
 
-            return await this.ParasutService.GetCategories(paramsObj);
-        } catch (error) {
-            throw error;
-        }
+        return await this.ParasutService.GetCategories(paramsObj)
+            .then((r) => r)
+            .catch((e) => {
+                throw e;
+            });
     }
 }

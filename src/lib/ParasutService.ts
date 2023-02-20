@@ -23,44 +23,51 @@ export class ParasutService {
         const config = {
             method,
             url,
+            body,
             headers,
             params,
         };
 
-        const response = await axios(config);
-
-        return response.data as T;
+        return await axios<T>(config)
+            .then((r) => r.data)
+            .catch((e) => {
+                throw e;
+            });
     }
 
     private queryBuilder(params: any) {
-        const replicate: any = _.cloneDeep(params);
-        const query: any = {};
+        try {
+            const replicate: any = _.cloneDeep(params);
+            const query: any = {};
 
-        delete replicate["access_token"];
+            delete replicate["access_token"];
 
-        if (params)
-            for (const k of Object.keys(params)) {
-                if (!replicate[k]) continue;
+            if (params)
+                for (const k of Object.keys(params)) {
+                    if (!replicate[k]) continue;
 
-                if (typeof replicate[k] === "object") {
-                    let definedQuery = "";
-                    let definedValue: any;
+                    if (typeof replicate[k] === "object") {
+                        let definedQuery = "";
+                        let definedValue: any;
 
-                    for (const key of Object.keys(replicate[k])) {
-                        if (replicate[k][key] !== undefined) {
-                            definedQuery = key;
-                            definedValue = replicate[k][key];
-                            break;
+                        for (const key of Object.keys(replicate[k])) {
+                            if (replicate[k][key] !== undefined) {
+                                definedQuery = key;
+                                definedValue = replicate[k][key];
+                                break;
+                            }
                         }
+
+                        query[`${k}${definedQuery}`] = definedValue;
+                    } else if (replicate[k]) {
+                        query[k] = replicate[k];
                     }
-
-                    query[`${k}${definedQuery}`] = definedValue;
-                } else if (replicate[k]) {
-                    query[k] = replicate[k];
                 }
-            }
 
-        return query;
+            return query;
+        } catch (e) {
+            throw e;
+        }
     }
 
     public async GetSalesInvoices(
@@ -68,20 +75,20 @@ export class ParasutService {
             access_token: string;
         },
     ) {
-        try {
-            return await this.buildRequest<GetSalesInvoicesResponse>(
-                ParasutEndpoints.BASE_URL,
-                `${ParasutEndpoints.VERSION}/${this.company_id}${ParasutEndpoints.GET_SALES_INVOICES}`,
-                HTTPMethods.GET,
-                this.queryBuilder(params),
-                undefined,
-                {
-                    Authorization: "Bearer " + params?.access_token,
-                },
-            );
-        } catch (error) {
-            throw error;
-        }
+        return await this.buildRequest<GetSalesInvoicesResponse>(
+            ParasutEndpoints.BASE_URL,
+            `${ParasutEndpoints.VERSION}/${this.company_id}${ParasutEndpoints.GET_SALES_INVOICES}`,
+            HTTPMethods.GET,
+            this.queryBuilder(params),
+            undefined,
+            {
+                Authorization: "Bearer " + params?.access_token,
+            },
+        )
+            .then((r) => r)
+            .catch((e) => {
+                throw e;
+            });
     }
 
     public async GetContacts(
@@ -89,20 +96,20 @@ export class ParasutService {
             access_token: string;
         },
     ) {
-        try {
-            return await this.buildRequest<GetContactsResponse>(
-                ParasutEndpoints.BASE_URL,
-                `${ParasutEndpoints.VERSION}/${this.company_id}${ParasutEndpoints.GET_CONTACTS}`,
-                HTTPMethods.GET,
-                this.queryBuilder(params),
-                undefined,
-                {
-                    Authorization: "Bearer " + params?.access_token,
-                },
-            );
-        } catch (error) {
-            throw error;
-        }
+        return await this.buildRequest<GetContactsResponse>(
+            ParasutEndpoints.BASE_URL,
+            `${ParasutEndpoints.VERSION}/${this.company_id}${ParasutEndpoints.GET_CONTACTS}`,
+            HTTPMethods.GET,
+            this.queryBuilder(params),
+            undefined,
+            {
+                Authorization: "Bearer " + params?.access_token,
+            },
+        )
+            .then((r) => r)
+            .catch((e) => {
+                throw e;
+            });
     }
 
     public async GetCategories(
@@ -110,19 +117,19 @@ export class ParasutService {
             access_token: string;
         },
     ) {
-        try {
-            return await this.buildRequest<GetCategoriesResponse>(
-                ParasutEndpoints.BASE_URL,
-                `${ParasutEndpoints.VERSION}/${this.company_id}${ParasutEndpoints.GET_CATEGORIES}`,
-                HTTPMethods.GET,
-                this.queryBuilder(params),
-                undefined,
-                {
-                    Authorization: "Bearer " + params?.access_token,
-                },
-            );
-        } catch (error) {
-            throw error;
-        }
+        return await this.buildRequest<GetCategoriesResponse>(
+            ParasutEndpoints.BASE_URL,
+            `${ParasutEndpoints.VERSION}/${this.company_id}${ParasutEndpoints.GET_CATEGORIES}`,
+            HTTPMethods.GET,
+            this.queryBuilder(params),
+            undefined,
+            {
+                Authorization: "Bearer " + params?.access_token,
+            },
+        )
+            .then((r) => r)
+            .catch((e) => {
+                throw e;
+            });
     }
 }
