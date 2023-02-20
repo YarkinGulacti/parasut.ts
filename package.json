@@ -1,6 +1,6 @@
 {
-    "name": "parasut-client.ts",
-    "version": "0.0.25",
+    "name": "@yarkingulacti/parasut-client",
+    "version": "0.0.28",
     "description": "A Typescript Parasut package.",
     "main": "build/index.js",
     "types": "build/index.d.ts",
